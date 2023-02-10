@@ -4,7 +4,7 @@ import { AuthContext } from "../../contexts/AuthContext";
 import "./login.css";
 
 const Login = () => {
-  const { setToken } = useContext(AuthContext);
+  const { setToken, setLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const initState = {
     email: "",
@@ -26,6 +26,7 @@ const Login = () => {
     if (res.status === 201) {
       const data = await res.json();
       setToken(data.token);
+      setLogin(data);
 
       console.log("data:", data);
       setUser({ ...initState });

@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../contexts/AuthContext";
 import "./navbar.css";
 
 const Navbar = () => {
+  const { login, token, setToken, setLogin } = useContext(AuthContext);
+
   return (
     <div className="navbar">
       <div className="navContainer">
@@ -36,12 +39,26 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="menu">
-          <Link
-            to="/login"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            Login
-          </Link>
+          {token ? (
+            <div className="login">
+              <span>{login.name}</span>
+              <button
+                onClick={() => {
+                  setToken("");
+                  setLogin(null);
+                }}
+              >
+                logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              style={{ color: "inherit", textDecoration: "none" }}
+            >
+              Login
+            </Link>
+          )}
         </div>
       </div>
     </div>

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./register.css";
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const initState = {
     email: "",
     number: "",
@@ -21,10 +24,17 @@ const Register = () => {
       },
       body: JSON.stringify(user),
     });
-    console.log(res);
-    const data = await res.json();
-    console.log("data:", data);
-    setUser({ ...initState });
+    console.log("res", res);
+    if (res.status === 201) {
+      const data = await res.json();
+      console.log("data:", data);
+      setUser({ ...initState });
+      navigate("/login");
+    } else {
+      console.log(res);
+      const err = await res.json();
+      alert(err.message);
+    }
   };
   return (
     <div className="register">
