@@ -12,7 +12,13 @@ const Home = () => {
       "http://localhost:3000/api/users/importfile",
       formData
     );
-    console.log(res);
+    if (res.status === 200) {
+      alert("file uploaded Successfully!!!");
+    } else {
+      console.log(res);
+      const err = await res.json();
+      alert(err.message);
+    }
   };
   return (
     <div className="home">
