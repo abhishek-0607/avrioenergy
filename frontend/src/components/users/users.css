@@ -1,0 +1,14 @@
+.users {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid blue;
+}
+/* .tableBox > table {
+  border: 1px solid black;
+  margin: 10px auto;
+  padding: 5px;
+  border: 1px solid blue;
+  width: 500px;
+  border-collapse: collapse;
+} */
