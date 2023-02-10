@@ -2,7 +2,7 @@ const app = require("./src/app");
 
 const connect = require("./src/configs/db");
 
-app.listen(8000, async function () {
+app.listen(3000, async function () {
   await connect();
-  console.log("Listening to port 8000");
+  console.log("Listening to port 3000");
 });
