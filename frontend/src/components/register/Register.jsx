@@ -2,15 +2,29 @@ import React, { useState } from "react";
 import "./register.css";
 
 const Register = () => {
-  const [user, setUser] = useState({
+  const initState = {
     email: "",
-    mobile: "",
+    number: "",
     name: "",
     password: "",
-  });
+  };
+  const [user, setUser] = useState(initState);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((prev) => ({ ...prev, [name]: value }));
+  };
+  const register = async () => {
+    const res = await fetch("http://localhost:3000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    console.log(res);
+    const data = await res.json();
+    console.log("data:", data);
+    setUser({ ...initState });
   };
   return (
     <div className="register">
@@ -29,8 +43,8 @@ const Register = () => {
           type="text"
           className="inputbox"
           placeholder="Enter the Mobile No."
-          name="mobile"
-          value={user.mobile}
+          name="number"
+          value={user.number}
         />
         <input
           onChange={handleChange}
@@ -52,6 +66,7 @@ const Register = () => {
           className="button"
           onClick={() => {
             console.log(user);
+            register();
           }}
         >
           Register
