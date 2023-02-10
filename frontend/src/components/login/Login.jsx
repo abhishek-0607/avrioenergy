@@ -30,7 +30,7 @@ const Login = () => {
 
       console.log("data:", data);
       setUser({ ...initState });
-      navigate("/users");
+      navigate("/");
     } else {
       console.log(res);
       const err = await res.json();
