@@ -8,6 +8,7 @@ router.post("/importfile", upload.single("file"), async (req, res) => {
   try {
     console.log("File:", req.file.path);
     const data = await csv().fromFile(req.file.path);
+
     const users = await User.insertMany(data);
     return res.status(200).send({ users });
   } catch (e) {
